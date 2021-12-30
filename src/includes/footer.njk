@@ -1,0 +1,26 @@
+  <div>&copy; 2023 <a rel='me' href='{{pkg.author.mastodon_url}}'>{{pkg.author.name}}</a><br>Made in New Hampshire</div>
+  <div class="button-bar">
+    <button class="btn btn-dark">D</button>
+    <button class="btn btn-light">L</button>
+    <button class="btn btn-system">S</button>
+  </div>
+  <div>
+    {% set theBranch%}
+        {%- if git.curbranch != 'HEAD' -%}
+            {{- git.curbranch-}}
+        {%- else -%}
+            main
+        {%- endif -%}
+    {% endset %}
+    {% if date and github -%}
+      post:  <a href={{github}}>{{date.toDateString().replace(' 0', ' ')}}</a><br>
+    {%- else %}
+      <a href="https://github.com/{{git.owner}}/{{git.name}}/blob/{{theBranch}}{{ page.inputPath.slice(1) }}">
+        {{- theBranch-}}@{{- git.commitsha -}}</a><br>
+    {%- endif %}
+    {% if draftDate and draft -%}
+      draft: <a href={{draft}}>{{draftDate.toDateString().replace(' 0', ' ')}}</a>
+    {%- else -%}
+      that’s how the light gets in
+    {%- endif %}
+  </div>

@@ -1,0 +1,23 @@
+
+{% set description %}
+    {% if newlines -%}
+        {{excerpt|truncate(132)|nl2br|safe}}
+    {%- else %}
+        {{ excerpt|truncate(132)|safe }}
+    {%- endif %}
+{% endset %}
+
+
+  <meta property="og:title" content="{{ renderData.title or title or pkg.name }} • {{ pkg.name }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{page.url | url}}" />
+  <meta property="og:description" content="{{ description | trim | safe }}" />
+  <meta property="og:image" content="https://screenshot.xhosi.com/{{ (pkg.siteData.url + "og" + page.url) |urlencode}}/medium/_{{ [8,4,2,55] | random}}"  />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ renderData.title or title or pkg.name }} • {{ pkg.name }}" />
+  <meta name="twitter:site" content="pborenstein" />
+  <meta name="twitter:description" content="{{ description | trim | safe }}" />
+  <meta name="twitter:image" content="https://screenshot.xhosi.com/{{ (pkg.siteData.url + "og" + page.url) |urlencode}}/medium/_{{ [33,54,345,46] | random}}"  />
+
+

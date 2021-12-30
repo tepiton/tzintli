@@ -1,0 +1,29 @@
+{% extends "base.njk" %}
+{%- set headStyle -%}
+    {%- if title != '. . .' -%}
+        style="display:block;"
+    {%- else -%}
+        style="display:none;"
+    {%- endif -%}
+{%- endset -%}
+{% block kontent %}
+  <article class="post {{ "newlines" if newlines }}">
+    <div>
+    <h1 {{ headStyle | safe -}}>{{ title | markdown | safe }}</h1>
+    <span class="date">
+    {% if draftDate and draft -%}
+      {{draftDate.toDateString().replace(' 0', ' ')}}
+    {%- else -%}
+      {{ page.date.toDateString().replace(' 0', ' ')}}
+    {%- endif %}
+   </span>
+
+
+   </div>
+    {% if newlines -%}
+      {{ content | nl2br | safe  }}
+    {%- else %}
+      {{ content | safe -}}
+    {%- endif %}
+  </article>
+{% endblock %}
